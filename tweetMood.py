@@ -15,17 +15,14 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth)
 
-# Step 2 - Prepare search
+# Step 2 - Prepare search (200 tweets is max)
 hash_tag = '#divinityoriginalsin2'
-since_date = "2017-09-20"
-until_date = "2017-09-29"
-number_of_tweets = 100
+number_of_tweets = 200
 
-public_tweets = api.search(hash_tag, count = number_of_tweets, since = since_date, until = until_date)
+public_tweets = api.search(hash_tag, count = number_of_tweets)
 
-# Step 3 - write to CSV
+# Step 3 - Analyze and write to CSV
 def clean_tweet(tweet):
-
 	#https://stackoverflow.com/questions/8376691/how-to-remove-hashtag-user-link-of-a-tweet-using-regular-expression/8377440
 	return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
